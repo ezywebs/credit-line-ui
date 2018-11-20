@@ -1,0 +1,5 @@
+<%= simple_form_for @credit_line url: credit_line_path(@credit_line), :method => 'post' do |f| %>
+  <%= f.input :keyword, :placeholder => 'keyword', input_html: { name: :keyword } %>
+  <%= f.input :city, :placeholder => 'city', input_html: { name: :keyword } %>
+  <%= f.button :submit, "Submit" %>
+<% end %>

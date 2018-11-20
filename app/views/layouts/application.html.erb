@@ -7,8 +7,22 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+  <div class="container">
+    <h1 class="text-center">Credit Lines</h1>
+    <h3 class="text-center">Best app for credit line management</h3>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <ul class="nav nav-pills">
+              <li><%= link_to "Home", root_path %></li>
+              <li><%= link_to "Apply for Credit Line", credit_line_path %></li>
+              <li><a href="#">Draw Money</a></li>
+              <li><a href="#">Make a Payment</a></li>
+              <li><a href="#">Collect Interest</a></li>
+            </ul>
+        </div>
+    </div>
+    <hr/>
+    <%= yield %>
+  </div>
 </body>
 </html>

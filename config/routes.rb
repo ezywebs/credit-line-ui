@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  root "welcome#index"
+  get "credit_line" => "credit_line#index"
+  get "credit_line/:id" => "credit_line#show", :as => "show"
+  post "credit_line/create/" => "credit_line#create"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

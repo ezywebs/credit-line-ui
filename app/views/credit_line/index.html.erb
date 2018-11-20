@@ -1,0 +1,29 @@
+<%= render partial: 'nav' %>
+
+<% if @data.is_a?(String) %>
+    <h5><%= @data %></h5>
+<% else %>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Limit</th>
+          <th scope="col">APR</th>
+          <th scope="col">Available</th>
+          <th scope="col">Last Statement Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @data[:data].each do |credit_line| %>
+        <tr>
+          <th scope="row"><%= link_to credit_line[:id], controller: "credit_line", action: "show", id: credit_line[:id] %></th>
+          <td><%= credit_line[:limit] %></td>
+          <td><%= credit_line[:apr] %></td>
+          <td><%= credit_line[:available] %></td>
+          <td><%= credit_line[:last_statement].to_date %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+<% end %>
+
