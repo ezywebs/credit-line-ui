@@ -1,0 +1,29 @@
+<%= render partial: 'nav' %>
+<%= render 'layouts/messages' %>
+<% if @data.is_a?(String) %>
+    <h5><%= @data %></h5>
+<% else %>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Amount</th>
+          <th scope="col">Credit Line</th>
+          <th scope="col">Date Posted</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @data[:data].each do |draw| %>
+        <tr>
+          <th scope="row"><%= link_to draw[:id], controller: "draws", action: "show", id: draw[:id] %></th>
+          <td><%= draw[:amount] %></td>
+          <td><%= draw[:credit_line_id] %></td>
+          <td><%= draw[:created_at].to_date %></td>
+          <td><%= link_to "Delete", "draws/#{draw[:id]}", method: :delete, data: { confirm: 'Are you certain you want to delete this draw transaction?' } %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+<% end %>
+

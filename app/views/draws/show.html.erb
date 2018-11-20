@@ -1,0 +1,16 @@
+<%= render partial: 'nav' %>
+<%= render 'layouts/messages' %>
+<% if @data.is_a?(String) %>
+  <h5><%= @data %></h5>
+<% else %>
+  <% draw = @data[:data] %>
+  <div class="col-md-6 col-md-offset-3">
+    <h4 class="text-center">Draw Details</h4>
+    <ul class="list-group">
+      <li class="list-group-item"><b>ID: </b><%= draw[:id] %></li>
+      <li class="list-group-item"><b>Amount: </b><%= draw[:amount] %></li>
+      <li class="list-group-item"><b>Credit Line: </b><%= draw[:credit_line_id] %></li>
+      <li class="list-group-item"><b>Date Created: </b><%= draw[:created_at].to_date %></li>
+    </ul>
+  </div>
+<% end %>

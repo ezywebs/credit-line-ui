@@ -11,7 +11,7 @@ module ApplicationHelper
       when 500...600
         data = "ERROR #{response.code}"
       else
-        data = "Unknown ERROR"
+        data = JSON.parse(response.body)["message"]
     end
     data
   end

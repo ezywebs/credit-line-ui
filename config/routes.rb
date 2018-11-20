@@ -13,4 +13,12 @@ Rails.application.routes.draw do
   get "payments/:id" => "payments#show"
   post "payments" => "payments#create"
   
+  get "draws" => "draws#index"
+  get "draws/new" => "draws#new"
+  delete "draws/:id" => "draws#destroy"
+  get "draws/:id" => "draws#show"
+  post "draws" => "draws#create"
+  
+  get "collector/charge/:id" => "collector#charge"
+  get "collector/:id" => "collector#view"
 end
