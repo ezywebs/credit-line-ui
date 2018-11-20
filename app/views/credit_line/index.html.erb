@@ -23,11 +23,26 @@
           <td><%= credit_line[:available] %></td>
           <td><%= credit_line[:last_statement].to_date %></td>
           <td>
-            <%= link_to "Delete", "credit_line/#{credit_line[:id]}", method: :delete, data: { confirm: 'Are you certain you want to delete this credit line?' }, class: 'action'  %>
-            <%= link_to "View Statement", "collector/#{credit_line[:id]}", class: 'action' %>
-            <%= link_to "Charge Interest", "collector/charge/#{credit_line[:id]}", class: 'action' %>
-            <%= link_to "Draw Money", draws_new_path(:credit_line_id => credit_line[:id]), class: 'action' %>
-            <%= link_to "Make Payment", payments_new_path(:credit_line_id => credit_line[:id]) %>
+            <%= link_to '<i class="fa fa-credit-card"></i>'.html_safe, 
+                        draws_new_path(:credit_line_id => credit_line[:id]), 
+                        class: 'action', title: 'Draw Money' %>
+            <%= link_to '<i class="fa fa-shopping-cart"></i>'.html_safe, 
+                        payments_new_path(:credit_line_id => credit_line[:id]), 
+                        title: 'Make Payment', 
+                        class: 'action' %>
+            <%= link_to '<i class="fa fa-file"></i>'.html_safe, 
+                        "collector/#{credit_line[:id]}", 
+                        class: 'action', 
+                        title: 'View Statement' %>
+            <%= link_to '<i class="fa fa-percent"></i>'.html_safe, 
+                        "collector/charge/#{credit_line[:id]}", 
+                        title: 'Charge Interest', 
+                        class: 'action' %>
+            <%= link_to '<i class="fa fa-trash"></i>'.html_safe, 
+                        "credit_line/#{credit_line[:id]}",
+                        method: :delete, 
+                        data: { confirm: 'Are you certain you want to delete this credit line?' }, 
+                        title: 'Delete Credit Line'  %>
           </td>
         </tr>
         <% end %>
