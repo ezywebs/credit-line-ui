@@ -1,0 +1,29 @@
+<%= render partial: 'nav' %>
+<%= render 'layouts/messages' %>
+<% if @data.is_a?(String) %>
+    <h5><%= @data %></h5>
+<% else %>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Amount</th>
+          <th scope="col">Credit Line</th>
+          <th scope="col">Date Posted</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @data[:data].each do |payment| %>
+        <tr>
+          <th scope="row"><%= link_to payment[:id], controller: "payments", action: "show", id: payment[:id] %></th>
+          <td><%= payment[:amount] %></td>
+          <td><%= payment[:credit_line_id] %></td>
+          <td><%= payment[:created_at].to_date %></td>
+          <td><%= link_to "Delete", "payments/#{payment[:id]}", method: :delete, data: { confirm: 'Are you certain you want to delete this payment?' } %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+<% end %>
+

@@ -1,36 +1,35 @@
 class CreditLineController < ApplicationController
+  include ApplicationHelper
+  
   def index
-    response = HTTParty.get('https://creditline-eng80lvl.c9users.io/api/v1/credit_lines')
-    parse_response(response)
+    response = HTTParty.get("#{BASE_URL}credit_lines")
+    @data = parse_response(response)
   end
   
   def show
-    response = HTTParty.get("https://creditline-eng80lvl.c9users.io/api/v1/credit_lines/#{params[:id]}")
-    parse_response(response)
+    response = HTTParty.get("#{BASE_URL}credit_lines/#{params[:id]}")
+    @data = parse_response(response)
   end
   
   def create
-   
+  result = HTTParty.post("#{BASE_URL}credit_lines", 
+                            :body => params[:data].to_json,
+                            :headers => { 'Content-Type' => 'application/json' } )
+  @data = parse_response(result)
+  flash.now[:success] = "Credit Line opened successfully"
+  render :controller => 'credit_line', :action => 'show', :id => @data[:data][:id]
   end
   
   def new
-     @result = HTTParty.post("https://creditline-eng80lvl.c9users.io/api/v1/credit_lines", 
-                            :body => { :limit => "", :apr => "" }.to_json,
-                            :headers => { 'Content-Type' => 'application/json' } )
   end
   
-  private
-  def parse_response(response)
-    @data = nil
-    case response.code
-      when 200
-        @data = JSON.parse(response.body).with_indifferent_access
-      when 404
-        @data = "Not found"
-      when 500...600
-        @data = "ERROR #{response.code}"
-      else
-        @data = "Unknown ERROR"
+  def destroy
+    response = HTTParty.delete("#{ApplicationHelper::BASE_URL}credit_lines/#{params[:id]}")
+    if response.code.eql?(200)
+      flash[:success] = "Credit Line deleted successfully"
+    else
+      flash[:danger] = "Error deleting credit line"
     end
+    redirect_to action: "index"
   end
 end
