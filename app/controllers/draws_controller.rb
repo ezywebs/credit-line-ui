@@ -23,7 +23,6 @@ class DrawsController < ApplicationController
       flash.now[:success] = "Draw made successfully"
       render :controller => 'draws', :action => 'show', :id => @data[:data][:id]
     end
-    
   end
   
   def new

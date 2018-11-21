@@ -16,8 +16,15 @@ class CreditLineController < ApplicationController
                             :body => params[:data].to_json,
                             :headers => { 'Content-Type' => 'application/json' } )
   @data = parse_response(result)
-  flash.now[:success] = "Credit Line opened successfully"
-  render :controller => 'credit_line', :action => 'show', :id => @data[:data][:id]
+  if @data.is_a?(String)
+    flash[:danger] = "Error. #{@data}"
+    redirect_to :controller => 'credit_line', :action => 'new'
+  else
+    flash.now[:success] = "Credit Line opened successfully"
+    render :controller => 'credit_line', :action => 'show', :id => @data[:data][:id]
+  end
+  
+  
   end
   
   def new
