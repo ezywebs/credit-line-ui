@@ -13,7 +13,7 @@
       <li class="list-group-item"><b>Limit: </b>$<%= data[:credit_line][:limit] %></li>
       <li class="list-group-item"><b>Available: </b>$<%= data[:credit_line][:available] %></li>
       <li class="list-group-item"><b>APR: </b><%= data[:credit_line][:apr] %>%</li>
-      <li class="list-group-item list-group-item-danger"><b>Total charge: </b>$<%= (data[:interest].to_f + data[:balance].to_f) %></li>
+      <li class="list-group-item list-group-item-danger"><b>Total charge: </b>$<%= (data[:interest].to_f + data[:balance].to_f).round(2) %></li>
     </ul>
     <h5 class="text-center">Transactions Applied for Billing Cycle</h5>
     <table class="table table-striped">
